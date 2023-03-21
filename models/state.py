@@ -8,4 +8,5 @@ class State(BaseModel):
     name = ""
     def __init__(self, **kwargs):
         BaseModel.__init__(self)
-        self.__dict__.update(kwargs)
+        if kwargs:
+            self.__dict__.update(kwargs)
