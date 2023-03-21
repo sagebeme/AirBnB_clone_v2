@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
-
+from datetime import datetime
 
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
@@ -48,10 +48,19 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                    self.all()[key] = classes[val['__class__']]()
+                    if val["created_at"]:
+                        val["created_at"] = datetime.fromisoformat(val["created_at"])
+
+                    if val["updated_at"]:
+                        val["updated_at"] = datetime.fromisoformat(val["updated_at"])
+
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
 
+    """
+        Deletes the objects inside the json file
+    """
     def delete(self, obj=None):
         key = ""
         if obj and obj in FileStorage.__objects.values():
@@ -60,3 +69,4 @@ class FileStorage:
                     key = k
             del FileStorage.__objects[key]
             FileStorage.save(self)
+
