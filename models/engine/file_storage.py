@@ -57,11 +57,11 @@ class FileStorage:
                     self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
-
-    """
-        Deletes the objects inside the json file
-    """
+    
     def delete(self, obj=None):
+        """
+        deletes values from json file
+        """
         key = ""
         if obj and obj in FileStorage.__objects.values():
             for k, v in FileStorage.__objects.items():
