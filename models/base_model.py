@@ -45,15 +45,8 @@ class BaseModel:
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
-
         return dictionary
     
     def delete(self):
         from models import storage
         storage.delete(self)
-
-
-    
-    '''id = Column(Integer, primary_key = True, nullable = False, autoincrement = True)
-    created_at = Column(datetime, nullable = False, datetime.utcnow())
-    updated_at = Column(datetime, nullable = False, datetime.utcnow())'''

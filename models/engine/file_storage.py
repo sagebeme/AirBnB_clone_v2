@@ -63,10 +63,9 @@ class FileStorage:
         deletes values from json file
         """
         key = ""
-        if obj and obj in FileStorage.__objects.values():
+        if obj in FileStorage.__objects.values():
             for k, v in FileStorage.__objects.items():
                 if v is obj:
                     key = k
-            del FileStorage.__objects[key]
+            self.__objects.pop(key)
             FileStorage.save(self)
-
