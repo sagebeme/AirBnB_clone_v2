@@ -22,9 +22,6 @@ class BaseModel:
                                                      '%Y-%m-%dT%H:%M:%S.%f')
             kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
-            for k, v in kwargs.items():
-                setattr(self, k, v)
-
             del kwargs['__class__']
             self.__dict__.update(kwargs)
 
@@ -46,12 +43,12 @@ class BaseModel:
         dictionary.update(self.__dict__)
         dictionary.update({'__class__':
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
-        '''dictionary['created_at'] = self.created_at.isoformat()
+        dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
 
         if dictionary["_sa_instance_state"]:
             del dictionary["_sa_instance_state"]
-        '''
+
         return dictionary
     
     def delete(self):

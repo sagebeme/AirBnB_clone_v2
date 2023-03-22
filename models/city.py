@@ -5,7 +5,8 @@ from sqlalchemy import Column,String,Integer,ForeignKey
 
 class City(BaseModel, base):
     """ The city class, contains state ID and name """
-    state_id = Column(String(60),Foreign_Key("states.id"),nullable = False)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    state_id = Column(String(60),ForeignKey("states.id"),nullable = False)
     name = Column(String(128),nullable = False )
 
     def __init__(self, **kwargs):

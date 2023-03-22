@@ -113,40 +113,15 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    def do_create(self, arg):
+    def do_create(self, args):
         """ Create an object of any class"""
-        '''arg_list = args.split(" ")
-        c_name = arg_list[0]
-        params = {}
-        for string in arg_list[1:]:
-            string = string.split('=')
-            if string[1].startswith('"'):
-                v = string[1].replace('_', ' ')[1: len(string[1]) - 1]
-                copy = []
-                for i in v:
-                    if i == '"':
-                        copy.append("\"")
-                    else:
-                        copy.append(i)
-                k = string[0]
-                params[k] = "".join(copy)
-            elif '.' in string[1]:
-                k = string[0]
-                v = float(string[1])
-                params[k] = v
-            elif string[1].isdigit():
-                v = int(string[1])
-                k = string[0]
-                params[k] = v'''
-        if not arg:
+        if not args:
             print("** class name missing **")
             return
-        args = arg.split()
-
-        if args[0] not in HBNBCommand.classes:
+        arg_list = args.split(" ")
+        if arg_list[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args[0]](**params)
         params = {}
         for string in arg_list[1:]:
             string = string.split('=')
@@ -168,7 +143,7 @@ class HBNBCommand(cmd.Cmd):
                 v = int(string[1])
                 k = string[0]
                 params[k] = v
-            setattr(new_instance, k, v)
+        new_instance = HBNBCommand.classes[arg_list[0]](**params)
         storage.save()
         print(new_instance.id)
         storage.save()
