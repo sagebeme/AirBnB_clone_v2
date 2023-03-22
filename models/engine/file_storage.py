@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
-import json
 from datetime import datetime
+import json
+
 
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
@@ -12,8 +13,12 @@ class FileStorage:
         """Returns a dictionary of models currently in storage"""
         if cls is None:
             return FileStorage.__objects
-        d = {k: v for k, v in FileStorage.__objects.items() if type(v) is cls}
-        return d
+        else:
+            obj_dict = {}
+            for key, value in FileStorage.__objects.items():
+                if isinstance(value, cls):
+                    obj_dict[key] = value
+            return obj_dict
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -48,24 +53,13 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                    if val["created_at"]:
-                        val["created_at"] = datetime.fromisoformat(val["created_at"])
-
-                    if val["updated_at"]:
-                        val["updated_at"] = datetime.fromisoformat(val["updated_at"])
-
                     self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
-    
+
     def delete(self, obj=None):
-        """
-        deletes values from json file
-        """
-        key = ""
-        if obj in FileStorage.__objects.values():
-            for k, v in FileStorage.__objects.items():
-                if v is obj:
-                    key = k
-            self.__objects.pop(key)
-            FileStorage.save(self)
+        """delete an object"""
+        if obj is not None:
+            key = obj.__class__.__name__+'.'+obj.id
+            if key in self.__objects:
+                del self.__objects[key]
