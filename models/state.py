@@ -12,9 +12,9 @@ class State(BaseModel, base):
     name = Column(String(128), nullable = False)
     cities = relationship('City', cascade = 'all, delete')
     def __init__(self, **kwargs):
+        from models import storage
         BaseModel.__init__(self)
         self.__dict__.update(kwargs)
-        from models import storage
         storage.new(self)
 
     @property

@@ -18,5 +18,7 @@ class Place(BaseModel):
     amenity_ids = []
 
     def __init__(self, **kwargs):
+        from models import storage
         BaseModel.__init__(self)
         self.__dict__.update(kwargs)
+        storage.new(self)

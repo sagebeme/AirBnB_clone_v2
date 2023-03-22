@@ -10,7 +10,9 @@ class City(BaseModel, base):
     name = Column(String(128),nullable = False )
 
     def __init__(self, **kwargs):
+        from models import storage
         BaseModel.__init__(self)
         self.__dict__.update(kwargs)
+        storage.new(self)
 
     __tablename__ = "cities"
