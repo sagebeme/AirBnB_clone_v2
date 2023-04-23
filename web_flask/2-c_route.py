@@ -8,12 +8,14 @@ Flask web app
 from flask import Flask
 app = Flask(__name__)
 
+
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
     """
     Prints hello hbnb
     """
     return 'Hello, HBNB!'
+
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
@@ -22,12 +24,14 @@ def hbnb():
     """
     return 'HBNB'
 
+
 @app.route('/c/<text>', strict_slashes=False)
 def c_is_fun(text):
     """
     C_is_fun: replaces _ with " " when printing c is fun
     """
     return "C " + text.replace("_", " ")
+
 
 if (__name__) == "__main__":
     """
