@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 """database storage engine"""
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from os import getenv
 from models.base_model import Base
 from sqlalchemy import create_engine
@@ -8,9 +11,6 @@ from sqlalchemy import text
 from models.user import User
 from models.state import State
 from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
 
 
 class DBStorage:
