@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-""" Starts a Flash Web Application Python is Cool"""
+
+"""
+Flash Web App Python is Cool
+"""
 from flask import Flask
 app = Flask(__name__)
 
@@ -32,7 +35,7 @@ def python_is_cool(text='is_cool'):
 @app.route('/number/<int:n>', strict_slashes=False)
 def is_n_number(n):
     """ Prints a Message when /number is called only if n is an int"""
-    return "{:d} is a number".format(n)
+    return f"{n:d} is a number"
 
 if __name__ == "__main__":
     """ Main Function """

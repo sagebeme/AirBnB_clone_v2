@@ -32,7 +32,7 @@ def python_is_cool(text='is_cool'):
 @app.route('/number/<int:n>', strict_slashes=False)
 def is_n_number(n):
     """ Prints a Message when /number is called only if n is an int"""
-    return "{:d} is a number".format(n)
+    return f"{n:d} is a number"
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
